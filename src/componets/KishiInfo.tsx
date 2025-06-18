@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Kishi } from "../types/kishi";
 
 interface KishiInfoProps {
@@ -6,7 +7,8 @@ interface KishiInfoProps {
 
 export default function KishiInfo({kishi}: KishiInfoProps) {
     return (
-        <li key={kishi.kishiNumber} className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+        <Link to={`/kishiList/${kishi.kishiNumber}`}>
+        <li key={kishi.kishiNumber} className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow hover:bg-gray-100 transition-colors duration-200">
           <div className="flex w-full items-center justify-between space-x-6 p-6">
             <div className="flex-1 truncate">
               <div className="flex items-center space-x-3">
@@ -17,7 +19,7 @@ export default function KishiInfo({kishi}: KishiInfoProps) {
               </div>
               <p className="mt-1 truncate text-sm text-gray-500">{kishi.nameRome}</p>
             </div>
-            <img alt="" src={kishi.imageUrl} className="size-20 shrink-0 rounded-full bg-gray-300" />
+            <img alt="" src={kishi.imageUrl} className="h-20 w-auto shrink-0 rounded-full bg-gray-300" />
           </div>
           {Array.isArray(kishi.title) && (
             <div className="text-center justify-between space-x-2 p-2">
@@ -49,5 +51,6 @@ export default function KishiInfo({kishi}: KishiInfoProps) {
             </div>
           </div>
         </li>
+        </Link>
     )
 }
