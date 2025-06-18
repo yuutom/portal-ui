@@ -12,7 +12,8 @@ export const dummyKishi: Kishi[] = [
         master: "宮田利男八段",
         ryuohsen: "1組（1組：2期）",
         junisen: "B級1組",
-        danni: "八段"
+        danni: "八段",
+        title: ["叡王"]
     },
     {
         id: 2,
@@ -25,7 +26,8 @@ export const dummyKishi: Kishi[] = [
         master: "杉本昌隆八段",
         ryuohsen: "竜王（1組以上：4期）",
         junisen: "名人（Ａ級以上：4期）",
-        danni: "九段"
+        danni: "九段",
+        title: ["名人", "竜王", "王位", "王座", "棋聖", "棋王", "王将"]
     },
     {
         id: 3,
@@ -38,6 +40,6 @@ export const dummyKishi: Kishi[] = [
         master: "井上慶太九段",
         ryuohsen: "1組（1組：2期）",
         junisen: "B級1組（A級：4期）",
-        danni: "八段"
+        danni: "八段",
     },
 ]

@@ -10,4 +10,5 @@ export interface Kishi {
     ryuohsen: string;
     junisen: string;
     danni: string;
+    title?: string[];
 }

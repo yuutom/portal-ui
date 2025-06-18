@@ -19,6 +19,15 @@ export default function KishiInfo({kishi}: KishiInfoProps) {
             </div>
             <img alt="" src={kishi.imageUrl} className="size-20 shrink-0 rounded-full bg-gray-300" />
           </div>
+          {Array.isArray(kishi.title) && (
+            <div className="text-center justify-between space-x-2 p-2">
+                {kishi.title.map((title) => (
+                <span className="inline-flex shrink-0 rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                    {title}
+                </span>
+                ))}
+            </div>
+            )}
           <div>
             <div className="-mt-px flex divide-x divide-gray-200">
               <div className="flex w-0 flex-1">
