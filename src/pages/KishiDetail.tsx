@@ -7,6 +7,7 @@ import {
 import { useParams } from 'react-router-dom'
 import type { Kishi } from '../types/kishi'
 import { dummyKishi } from '../data/kishis'
+import { getStatusIconAndStyle } from '../enum/ResultStatus'
 
 const user = {
   name: 'Whitney Francis',
@@ -19,48 +20,7 @@ const eventTypes = {
   advanced: { icon: HandThumbUpIcon, bgColorClass: 'bg-blue-500' },
   completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' },
 }
-const timeline = [
-  {
-    id: 1,
-    type: eventTypes.applied,
-    content: 'Applied to',
-    target: 'Front End Developer',
-    date: 'Sep 20',
-    datetime: '2020-09-20',
-  },
-  {
-    id: 2,
-    type: eventTypes.advanced,
-    content: 'Advanced to phone screening by',
-    target: 'Bethany Blake',
-    date: 'Sep 22',
-    datetime: '2020-09-22',
-  },
-  {
-    id: 3,
-    type: eventTypes.completed,
-    content: 'Completed phone screening with',
-    target: 'Martha Gardner',
-    date: 'Sep 28',
-    datetime: '2020-09-28',
-  },
-  {
-    id: 4,
-    type: eventTypes.advanced,
-    content: 'Advanced to interview by',
-    target: 'Bethany Blake',
-    date: 'Sep 30',
-    datetime: '2020-09-30',
-  },
-  {
-    id: 5,
-    type: eventTypes.completed,
-    content: 'Completed interview with',
-    target: 'Katherine Snyder',
-    date: 'Oct 4',
-    datetime: '2020-10-04',
-  },
-]
+
 const comments = [
   {
     id: 1,
@@ -131,6 +91,13 @@ function formatJapaneseDate(dateStr: string): string {
   const day = date.getDate();
 
   return `${year}年${month}月${day}日`;
+}
+
+function formatShortDate(dateString: string): string {
+  const date = new Date(dateString);
+  const month = date.getMonth() + 1; // 月は0始まりなので +1
+  const day = date.getDate();
+  return `${month}/${day}`;
 }
 
 export default function Example() {
@@ -271,7 +238,7 @@ export default function Example() {
                   <div className="divide-y divide-gray-200">
                     <div className="px-4 py-5 sm:px-6">
                       <h2 id="notes-title" className="text-lg font-medium text-gray-900">
-                        Notes
+                        棋士成績
                       </h2>
                     </div>
                     <div className="px-4 py-6 sm:px-6">
@@ -355,61 +322,47 @@ export default function Example() {
               </section>
             </div>
 
+            {/* 対局結果タイムライン */}
             <section aria-labelledby="timeline-title" className="lg:col-span-1 lg:col-start-3">
               <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
                 <h2 id="timeline-title" className="text-lg font-medium text-gray-900">
                   対局結果
                 </h2>
-
                 {/* Activity Feed */}
                 <div className="mt-6 flow-root">
-                  <ul role="list" className="-mb-8">
-                    {timeline.map((item, itemIdx) => (
-                      <li key={item.id}>
+                <ul role="list" className="-mb-8">
+                  {kishi.resultsFromKishi?.map((result) => {
+                    const { icon: StatusIcon, bgColor } = getStatusIconAndStyle(result.resultStatus);
+
+                    return (
+                      <li key={result.gameName}>
                         <div className="relative pb-8">
-                          {itemIdx !== timeline.length - 1 ? (
-                            <span
-                              aria-hidden="true"
-                              className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"
-                            />
-                          ) : null}
-                          <div className="relative flex space-x-3">
+                          <div className="relative flex items-center space-x-3">
                             <div>
                               <span
                                 className={classNames(
-                                  item.type.bgColorClass,
+                                  bgColor,
                                   'flex size-8 items-center justify-center rounded-full ring-8 ring-white',
                                 )}
                               >
-                                <item.type.icon aria-hidden="true" className="size-5 text-white" />
+                                <StatusIcon aria-hidden="true" className="size-5 text-white" />
                               </span>
                             </div>
                             <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                               <div>
-                                <p className="text-sm text-gray-500">
-                                  {item.content}{' '}
-                                  <a href="#" className="font-medium text-gray-900">
-                                    {item.target}
-                                  </a>
-                                </p>
+                                <p className="text-sm font-medium text-gray-900">{result.gameName}</p>
+                                <p className="ml-4 text-xs text-gray-500">vs. {result.oponentName}</p>
                               </div>
                               <div className="whitespace-nowrap text-right text-sm text-gray-500">
-                                <time dateTime={item.datetime}>{item.date}</time>
+                                {formatShortDate(result.date)}
                               </div>
                             </div>
                           </div>
                         </div>
                       </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-6 flex flex-col justify-stretch">
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                  >
-                    Advance to offer
-                  </button>
+                    );
+                  })}
+                </ul>
                 </div>
               </div>
             </section>

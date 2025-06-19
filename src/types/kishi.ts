@@ -1,5 +1,6 @@
 import type { Affiliation } from "../enum/Affiliation";
 import type { PlayingStyle } from "../enum/PlayingStyle";
+import type { KishiRecord } from "./kishiRecord";
 import type { ResultFromKishi } from "./resultFromKishi";
 
 export interface Kishi {
@@ -19,4 +20,5 @@ export interface Kishi {
     affiliation?: Affiliation;
     playingStyle?: PlayingStyle;
     resultsFromKishi?: ResultFromKishi[];
+    record?: KishiRecord;
 }

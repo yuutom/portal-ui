@@ -27,37 +27,43 @@ export const dummyKishi: Kishi[] = [
                 gameCategory: GameCategory.EIOH,
                 oponentNumber: 307,
                 oponentName: "藤井聡太",
-                resultStatus: ResultStatus.DEFEATE
+                resultStatus: ResultStatus.DEFEATE,
+                date: "2025-06-19"
             },
             {
                 gameName: "王座戦 挑決トーナメント・千日手",
                 gameCategory: GameCategory.OUZA,
                 oponentNumber: 278,
                 oponentName: "菅井竜也",
-                resultStatus: ResultStatus.WIN
+                resultStatus: ResultStatus.WIN,
+                date: "2025-06-15"
             },
             {
                 gameName: "叡王戦 第5局",
                 gameCategory: GameCategory.EIOH,
                 oponentNumber: 307,
                 oponentName: "藤井聡太",
-                resultStatus: ResultStatus.DEFEATE
+                resultStatus: ResultStatus.DEFEATE,
+                date: "2025-06-24"
             },
             {
                 gameName: "叡王戦 第5局",
                 gameCategory: GameCategory.EIOH,
                 oponentNumber: 307,
                 oponentName: "藤井聡太",
-                resultStatus: ResultStatus.DEFEATE
+                resultStatus: ResultStatus.DEFEATE,
+                date: "2025-06-30"
             },
             {
                 gameName: "叡王戦 第5局",
                 gameCategory: GameCategory.EIOH,
                 oponentNumber: 307,
                 oponentName: "藤井聡太",
-                resultStatus: ResultStatus.DEFEATE
+                resultStatus: ResultStatus.DEFEATE,
+                date: "2025-06-24"
             },
-        ]
+        ],
+        record: {wins: 5, loses: 3, total_ranking: 15, wins_ranking: 17, winning_rate_ranking: 10}
     },
     {
         id: 2,

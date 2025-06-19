@@ -7,4 +7,5 @@ export interface ResultFromKishi {
     oponentNumber: number;
     oponentName: string;
     resultStatus: ResultStatus;
+    date: string
 }
