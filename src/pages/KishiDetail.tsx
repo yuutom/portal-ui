@@ -1,7 +1,6 @@
 import {
   CheckIcon,
   HandThumbUpIcon,
-  PaperClipIcon,
   QuestionMarkCircleIcon,
   UserIcon,
 } from '@heroicons/react/20/solid'
@@ -15,10 +14,6 @@ const user = {
   imageUrl:
     'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
 }
-const attachments = [
-  { name: 'resume_front_end_developer.pdf', href: '#' },
-  { name: 'coverletter_front_end_developer.pdf', href: '#' },
-]
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
   advanced: { icon: HandThumbUpIcon, bgColorClass: 'bg-blue-500' },
@@ -94,12 +89,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function calculateAge(birthDateString: string): number | null {
-  const birth = new Date(birthDateString);
+function getCurrentAge(birthDate: string): number | null {
+  const birth = new Date(birthDate);
   const today = new Date();
   let age = today.getFullYear() - birth.getFullYear();
 
-  // まだ誕生日が来ていないなら -1
   const hasBirthdayPassedThisYear =
     today.getMonth() > birth.getMonth() ||
     (today.getMonth() === birth.getMonth() && today.getDate() >= birth.getDate());
@@ -109,6 +103,34 @@ function calculateAge(birthDateString: string): number | null {
   }
 
   return age;
+}
+
+function getDebutAge(birthDate: string, debutDate: string): number | null {
+  const birth = new Date(birthDate);
+  const debut = new Date(debutDate);
+  let age = debut.getFullYear() - birth.getFullYear();
+
+  const hasBirthdayPassedThisYear =
+    debut.getMonth() > birth.getMonth() ||
+    (debut.getMonth() === birth.getMonth() && debut.getDate() >= birth.getDate());
+
+  if (!hasBirthdayPassedThisYear) {
+    age -= 1;
+  }
+
+  return age;
+}
+
+
+function formatJapaneseDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return '不正な日付';
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // 0始まりなので+1
+  const day = date.getDate();
+
+  return `${year}年${month}月${day}日`;
 }
 
 export default function Example() {
@@ -150,19 +172,16 @@ export default function Example() {
                 </div>
               </div>
               <div className="ml-4">
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
                   <h1 className="text-4xl font-bold text-gray-900">{kishi?.nameKana}</h1>
+                  <div className="ml-2 space-x-2">
+                  {displayTitle.map((title) => (
                   <span className="inline-flex shrink-0 rounded-full bg-green-50 px-4.5 py-1.5 font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                    {kishi?.danni}
+                      {title}
                   </span>
+                  ))}
+                  </div>
                 </div>
-                <p className="text-sm font-medium text-gray-500 mt-4">
-                  Applied for{' '}
-                  <a className="text-gray-900">
-                    Front End Developer
-                  </a>{' '}
-                  on <time dateTime="2020-08-25">August 25, 2020</time>
-                </p>
               </div>
             </div>
             <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
@@ -188,9 +207,8 @@ export default function Example() {
                 <div className="bg-white shadow sm:rounded-lg">
                   <div className="px-4 py-5 sm:px-6">
                     <h2 id="applicant-information-title" className="text-lg/6 font-medium text-gray-900">
-                      Applicant Information
+                      棋士情報
                     </h2>
-                    <p className="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
                   </div>
                   <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
                     <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
@@ -211,6 +229,22 @@ export default function Example() {
                         <dd className="mt-1 text-sm text-gray-900">{kishi?.master}</dd>
                       </div>
                       <div className="sm:col-span-1">
+                        <dt className="text-sm font-medium text-gray-500">生年月日</dt>
+                        <dd className="mt-1 text-sm text-gray-900">{formatJapaneseDate(kishi.birthDate)}（{getCurrentAge(kishi.birthDate)}歳）</dd>
+                      </div>
+                      <div className="sm:col-span-1">
+                        <dt className="text-sm font-medium text-gray-500">デビュー年月日</dt>
+                        <dd className="mt-1 text-sm text-gray-900">{formatJapaneseDate(kishi.debutDate)}（{getDebutAge(kishi.birthDate, kishi.debutDate)}歳）</dd>
+                      </div>
+                      <div className="sm:col-span-1">
+                        <dt className="text-sm font-medium text-gray-500">所属</dt>
+                        <dd className="mt-1 text-sm text-gray-900">{kishi.affiliation}</dd>
+                      </div>
+                      <div className="sm:col-span-1">
+                        <dt className="text-sm font-medium text-gray-500">棋風</dt>
+                        <dd className="mt-1 text-sm text-gray-900">{kishi.playingStyle}</dd>
+                      </div>
+                      <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">順位戦</dt>
                         <dd className="mt-1 text-sm text-gray-900">{kishi?.junisen}</dd>
                       </div>
@@ -226,38 +260,7 @@ export default function Example() {
                           proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
                         </dd>
                       </div>
-                      <div className="sm:col-span-2">
-                        <dt className="text-sm font-medium text-gray-500">Attachments</dt>
-                        <dd className="mt-1 text-sm text-gray-900">
-                          <ul role="list" className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                            {attachments.map((attachment) => (
-                              <li
-                                key={attachment.name}
-                                className="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
-                              >
-                                <div className="flex w-0 flex-1 items-center">
-                                  <PaperClipIcon aria-hidden="true" className="size-5 shrink-0 text-gray-400" />
-                                  <span className="ml-2 w-0 flex-1 truncate">{attachment.name}</span>
-                                </div>
-                                <div className="ml-4 shrink-0">
-                                  <a href={attachment.href} className="font-medium text-blue-600 hover:text-blue-500">
-                                    Download
-                                  </a>
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
-                        </dd>
-                      </div>
                     </dl>
-                  </div>
-                  <div>
-                    <a
-                      href="#"
-                      className="block bg-gray-50 px-4 py-4 text-center text-sm font-medium text-gray-500 hover:text-gray-700 sm:rounded-b-lg"
-                    >
-                      Read full application
-                    </a>
                   </div>
                 </div>
               </section>
