@@ -1,5 +1,7 @@
 import { Affiliation } from "../enum/Affiliation";
+import { GameCategory } from "../enum/GameCategory";
 import { PlayingStyle } from "../enum/PlayingStyle";
+import { ResultStatus } from "../enum/ResultStatus";
 import type { Kishi } from "../types/kishi";
 
 export const dummyKishi: Kishi[] = [
@@ -18,7 +20,44 @@ export const dummyKishi: Kishi[] = [
         danni: "八段",
         title: ["叡王"],
         affiliation: Affiliation.KANTOU,
-        playingStyle: PlayingStyle.IBISHA
+        playingStyle: PlayingStyle.IBISHA,
+        resultsFromKishi: [
+            {
+                gameName: "叡王戦 第5局",
+                gameCategory: GameCategory.EIOH,
+                oponentNumber: 307,
+                oponentName: "藤井聡太",
+                resultStatus: ResultStatus.DEFEATE
+            },
+            {
+                gameName: "王座戦 挑決トーナメント・千日手",
+                gameCategory: GameCategory.OUZA,
+                oponentNumber: 278,
+                oponentName: "菅井竜也",
+                resultStatus: ResultStatus.WIN
+            },
+            {
+                gameName: "叡王戦 第5局",
+                gameCategory: GameCategory.EIOH,
+                oponentNumber: 307,
+                oponentName: "藤井聡太",
+                resultStatus: ResultStatus.DEFEATE
+            },
+            {
+                gameName: "叡王戦 第5局",
+                gameCategory: GameCategory.EIOH,
+                oponentNumber: 307,
+                oponentName: "藤井聡太",
+                resultStatus: ResultStatus.DEFEATE
+            },
+            {
+                gameName: "叡王戦 第5局",
+                gameCategory: GameCategory.EIOH,
+                oponentNumber: 307,
+                oponentName: "藤井聡太",
+                resultStatus: ResultStatus.DEFEATE
+            },
+        ]
     },
     {
         id: 2,

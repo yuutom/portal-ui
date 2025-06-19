@@ -1,5 +1,6 @@
 import type { Affiliation } from "../enum/Affiliation";
 import type { PlayingStyle } from "../enum/PlayingStyle";
+import type { ResultFromKishi } from "./resultFromKishi";
 
 export interface Kishi {
     id: number;
@@ -15,6 +16,7 @@ export interface Kishi {
     junisen: string;
     danni: string;
     title?: string[];
-    affiliation: Affiliation;
-    playingStyle: PlayingStyle;
+    affiliation?: Affiliation;
+    playingStyle?: PlayingStyle;
+    resultsFromKishi?: ResultFromKishi[];
 }
