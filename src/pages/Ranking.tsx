@@ -19,6 +19,7 @@ import {
 } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { dummyKishi } from '../data/kishis'
 
 const sortOptions = [
   { name: 'Most Popular', href: '#' },
@@ -66,8 +67,11 @@ const filters = [
 
 export default function Ranking() {
   const [open, setOpen] = useState(false)
+  const [selectedFilters, setSelectedFilters] = useState<{ [key: string]: Set<string> }>({});
+  const [sortKey, setSortKey] = useState<string>('popular');
 
   return (
+    <div>
     <div className="bg-gray-50">
       {/* Mobile filter dialog */}
       <Dialog open={open} onClose={setOpen} className="relative z-40 sm:hidden">
@@ -159,14 +163,7 @@ export default function Ranking() {
       </Dialog>
 
       <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
-        <div className="py-24">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
-          <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
-            Thoughtfully designed objects for the workspace, home, and travel.
-          </p>
-        </div>
-
-        <section aria-labelledby="filter-heading" className="border-t border-gray-200 py-6">
+        <section aria-labelledby="filter-heading" className="py-6">
           <h2 id="filter-heading" className="sr-only">
             Product filters
           </h2>
@@ -287,5 +284,71 @@ export default function Ranking() {
         </section>
       </div>
     </div>
+
+    <div className="px-4 sm:px-6 lg:px-8">
+      <div className="mt-2 flow-root">
+        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <table className="min-w-full divide-y divide-gray-300">
+              <thead>
+                <tr>
+                  <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                    Name
+                  </th>
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Title
+                  </th>
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Status
+                  </th>
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Role
+                  </th>
+                  <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                    <span className="sr-only">Edit</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                {dummyKishi.map((kishi) => (
+                  <tr key={kishi.kishiNumber}>
+                    <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+                      <div className="flex items-center">
+                        <div className="size-11 shrink-0">
+                          <img alt="" src={kishi.imageUrl} className="size-11 rounded-full" />
+                        </div>
+                        <div className="ml-4">
+                          <div className="font-medium text-gray-900">{kishi.nameKana}</div>
+                          <div className="mt-1 text-gray-500">{kishi.nameRome}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      <div className="text-gray-900">{kishi.title}</div>
+                      <div className="mt-1 text-gray-500">{kishi.danni}</div>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                        Active
+                      </span>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.birthDate}</td>
+                    <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                        Edit<span className="sr-only">, {kishi.debutDate}</span>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
   )
 }
