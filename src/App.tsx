@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import 'preline'
 import Layout from './componets/Layout';
 import KishiDetail from './pages/KishiDetail';
+import Ranking from './pages/Ranking';
 
 async function loadPreline() {
   return import('preline/dist/index.js');
@@ -35,6 +36,7 @@ export default function Example() {
           <Route index element={<Home />} />
           <Route path="kishiList" element={<KishiList />} />
           <Route path="kishiList/:kishiNumber" element={<KishiDetail />} />
+          <Route path="ranking" element={<Ranking />} />
         </Route>
       </Routes>
   )

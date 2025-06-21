@@ -1,9 +1,3 @@
-import {
-  CheckIcon,
-  HandThumbUpIcon,
-  QuestionMarkCircleIcon,
-  UserIcon,
-} from '@heroicons/react/20/solid'
 import { useParams } from 'react-router-dom'
 import type { Kishi } from '../types/kishi'
 import { dummyKishi } from '../data/kishis'
@@ -15,35 +9,6 @@ const user = {
   imageUrl:
     'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
 }
-const eventTypes = {
-  applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
-  advanced: { icon: HandThumbUpIcon, bgColorClass: 'bg-blue-500' },
-  completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' },
-}
-
-const comments = [
-  {
-    id: 1,
-    name: 'Leslie Alexander',
-    date: '4d ago',
-    imageId: '1494790108377-be9c29b29330',
-    body: 'Ducimus quas delectus ad maxime totam doloribus reiciendis ex. Tempore dolorem maiores. Similique voluptatibus tempore non ut.',
-  },
-  {
-    id: 2,
-    name: 'Michael Foster',
-    date: '4d ago',
-    imageId: '1519244703995-f4e0f30006d5',
-    body: 'Et ut autem. Voluptatem eum dolores sint necessitatibus quos. Quis eum qui dolorem accusantium voluptas voluptatem ipsum. Quo facere iusto quia accusamus veniam id explicabo et aut.',
-  },
-  {
-    id: 3,
-    name: 'Dries Vincent',
-    date: '4d ago',
-    imageId: '1506794778202-cad84cf45f1d',
-    body: 'Expedita consequatur sit ea voluptas quo ipsam recusandae. Ab sint et voluptatem repudiandae voluptatem et eveniet. Nihil quas consequatur autem. Perferendis rerum et.',
-  },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -232,7 +197,7 @@ export default function Example() {
                 </div>
               </section>
 
-              {/* Comments*/}
+              {/* 棋士成績*/}
               <section aria-labelledby="notes-title">
                 <div className="bg-white shadow sm:overflow-hidden sm:rounded-lg">
                   <div className="divide-y divide-gray-200">
@@ -241,80 +206,68 @@ export default function Example() {
                         棋士成績
                       </h2>
                     </div>
-                    <div className="px-4 py-6 sm:px-6">
-                      <ul role="list" className="space-y-8">
-                        {comments.map((comment) => (
-                          <li key={comment.id}>
-                            <div className="flex space-x-3">
-                              <div className="shrink-0">
-                                <img
-                                  alt=""
-                                  src={`https://images.unsplash.com/photo-${comment.imageId}?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`}
-                                  className="size-10 rounded-full"
-                                />
-                              </div>
-                              <div>
-                                <div className="text-sm">
-                                  <a href="#" className="font-medium text-gray-900">
-                                    {comment.name}
-                                  </a>
-                                </div>
-                                <div className="mt-1 text-sm text-gray-700">
-                                  <p>{comment.body}</p>
-                                </div>
-                                <div className="mt-2 space-x-2 text-sm">
-                                  <span className="font-medium text-gray-500">{comment.date}</span>{' '}
-                                  <span className="font-medium text-gray-500">&middot;</span>{' '}
-                                  <button type="button" className="font-medium text-gray-900">
-                                    Reply
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="bg-gray-50 px-4 py-6 sm:px-6">
-                    <div className="flex space-x-3">
-                      <div className="shrink-0">
-                        <img alt="" src={user.imageUrl} className="size-10 rounded-full" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <form action="#">
-                          <div>
-                            <label htmlFor="comment" className="sr-only">
-                              About
-                            </label>
-                            <textarea
-                              id="comment"
-                              name="comment"
-                              rows={3}
-                              placeholder="Add a note"
-                              className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm outline-none ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm/6"
-                              defaultValue={''}
-                            />
-                          </div>
-                          <div className="mt-3 flex items-center justify-between">
-                            <a
-                              href="#"
-                              className="group inline-flex items-start space-x-2 text-sm text-gray-500 hover:text-gray-900"
-                            >
-                              <QuestionMarkCircleIcon
-                                aria-hidden="true"
-                                className="size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
-                              />
-                              <span>Some HTML is okay.</span>
-                            </a>
-                            <button
-                              type="submit"
-                              className="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                            >
-                              Comment
-                            </button>
-                          </div>
-                        </form>
+                    <div className="mt-2 mb-4 flow-root overflow-hidden">
+                      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <table className="w-full text-left">
+                          <tbody>
+                              <tr>
+                                <td className="relative py-4 pr-3 text-sm font-medium text-gray-900">
+                                  今年度成績
+                                  <div className="absolute bottom-0 right-full h-px w-screen bg-gray-100" />
+                                  <div className="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
+                                </td>
+                                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{kishi.record?.wins}勝{kishi.record?.loses}敗</td>
+                              </tr>
+                              <tr>
+                                <td className="relative py-4 pr-3 text-sm font-medium text-gray-900">
+                                  勝率ランキング
+                                  <div className="absolute bottom-0 right-full h-px w-screen bg-gray-100" />
+                                  <div className="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
+                                </td>
+                                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                                {kishi.record && (kishi.record.wins + kishi.record.loses > 0) ? (
+                                  <>
+                                  {((kishi.record.wins / (kishi.record.wins + kishi.record.loses))).toFixed(4)} ({kishi.record?.winning_rate_ranking}位)
+                                  </>
+                                ) : (
+                                  "-"
+                                )}
+                              </td>
+                              </tr>
+                              <tr>
+                                <td className="relative py-4 pr-3 text-sm font-medium text-gray-900">
+                                  対局数ランキング
+                                  <div className="absolute bottom-0 right-full h-px w-screen bg-gray-100" />
+                                  <div className="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
+                                </td>
+                                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                                {kishi.record && (kishi.record.wins + kishi.record.loses > 0) ? (
+                                  <>
+                                  {(kishi.record.wins + kishi.record.loses)}局 ({kishi.record?.total_ranking}位)
+                                  </>
+                                ) : (
+                                  "-"
+                                )}
+                              </td>
+                              </tr>
+                              <tr>
+                                <td className="relative py-4 pr-3 text-sm font-medium text-gray-900">
+                                  勝数ランキング
+                                  <div className="absolute bottom-0 right-full h-px w-screen bg-gray-100" />
+                                  <div className="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
+                                </td>
+                                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                                {kishi.record && (kishi.record.wins > 0) ? (
+                                  <>
+                                  {kishi.record.wins}勝 ({kishi.record?.wins_ranking}位)
+                                  </>
+                                ) : (
+                                  "-"
+                                )}
+                              </td>
+                              </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
