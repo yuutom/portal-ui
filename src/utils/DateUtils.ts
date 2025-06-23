@@ -48,7 +48,7 @@ export class DateUtils {
      */
     static formatJapaneseDate(dateStr: string): string {
       const date = new Date(dateStr);
-      if (isNaN(date.getTime())) return '不正な日付';
+      if (isNaN(date.getTime())) return "不正な日付";
   
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
@@ -62,12 +62,26 @@ export class DateUtils {
      */
     static formatShortDate(dateStr: string): string {
       const date = new Date(dateStr);
-      if (isNaN(date.getTime())) return '不正な日付';
+      if (isNaN(date.getTime())) return "不正な日付";
   
       const month = date.getMonth() + 1;
       const day = date.getDate();
   
       return `${month}/${day}`;
     }
+
+    static formatJapaneseDateWithWeekday(dateStr: string): string {
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) return "不正な日付";
+    
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+    
+      const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+      const weekday = weekdays[date.getDay()];
+    
+      return `${month}月${day}日 (${weekday})`;
+    }
+    
   }
   

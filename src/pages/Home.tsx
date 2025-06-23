@@ -2,6 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { dummyPickedUpGames } from "../data/games";
 import { Link } from "react-router-dom";
 import { ResultStatus } from "../enum/ResultStatus";
+import { DateUtils } from "../utils/DateUtils";
 
 const people = [
     {
@@ -125,61 +126,57 @@ export default function Home() {
         className="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
         >
         {dummyPickedUpGames.map((game) => (
-            <li key={game.id} className="relative flex justify-around gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
-            <div className="flex min-w-0 gap-x-4">
-                <img alt="" src={"https://www.shogi.or.jp/images/player/pro/" + game.senteNumber + ".jpg"} className="size-11 object-cover rounded-full bg-gray-50" />
-                <div className="min-w-0 flex-auto">
-                <p className="text-sm/6 font-semibold text-gray-900">
-                <a href={`/kishiList/${game.senteNumber}`} className="hover:underline">
-                  {game.senteName}
-                </a>
-              </p>
-              {game.senteResult == ResultStatus.DEFEATE ? (
-                    <div className="mt-1 flex items-center gap-x-1.5">
-                    <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                        <div className="size-1.5 rounded-full bg-emerald-500" />
-                    </div>
-                    <p className="text-xs/5 text-gray-500">勝</p>
-                    </div>
-                ) : (
-                    <div className="mt-1 flex items-center gap-x-1.5">
-                    <div className="flex-none rounded-full bg-rose-500/20 p-1">
-                        <div className="size-1.5 rounded-full bg-rose-500" />
-                    </div>
-                    <p className="text-xs/5 text-gray-500">負</p>
-                    </div>
-                )}
+            <li className="grid grid-cols-7 items-center px-4 py-5 hover:bg-gray-50 sm:px-6">
+            <div className="text-gray-500 text-sm">{game.gameName}</div>
+            {/* 先手 */}
+            <div className="flex items-center gap-x-4">
+                <img
+                alt=""
+                src={`https://www.shogi.or.jp/images/player/pro/${game.senteNumber}.jpg`}
+                className="size-11 object-cover rounded-full bg-gray-50"
+                />
+                <div className="flex">
+                <p className="text-sm font-semibold text-gray-900">
+                    <a href={`/kishiList/${game.senteNumber}`} className="hover:underline">
+                    {game.senteName}
+                    </a>
+                </p>
                 </div>
             </div>
 
-            <div>vs</div>
-
-            <div className="flex min-w-0 gap-x-4">
-                <img alt="" src={"https://www.shogi.or.jp/images/player/pro/" + game.goteNumber + ".jpg"} className="size-11 object-cover rounded-full bg-gray-50" />
-                <div className="min-w-0 flex-auto">
-                <p className="text-sm/6 font-semibold text-gray-900">
-                <a href={`/kishiList/${game.goteNumber}`} className="hover:underline">
-                  {game.goteName}
-                </a>
-              </p>
-              {game.goteResult == ResultStatus.DEFEATE ? (
-                    <div className="mt-1 flex items-center gap-x-1.5">
-                    <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                        <div className="size-1.5 rounded-full bg-emerald-500" />
+            <div className="flex items-center gap-x-1.5">
+                    <div className={`flex-none rounded-full p-1 ${game.senteResult === ResultStatus.DEFEATE ? 'bg-emerald-500/20' : 'bg-rose-500/20'}`}>
+                    <div className={`size-1.5 rounded-full ${game.senteResult === ResultStatus.DEFEATE ? 'bg-emerald-500' : 'bg-rose-500'}`} />
                     </div>
-                    <p className="text-xs/5 text-gray-500">勝</p>
-                    </div>
-                ) : (
-                    <div className="mt-1 flex items-center gap-x-1.5">
-                    <div className="flex-none rounded-full bg-rose-500/20 p-1">
-                        <div className="size-1.5 rounded-full bg-rose-500" />
-                    </div>
-                    <p className="text-xs/5 text-gray-500">負</p>
-                    </div>
-                )}
                 </div>
+
+            {/* vs */}
+            <div className="text-sm text-center font-medium text-gray-500">vs</div>
+
+            <div className="mt-1 flex items-center gap-x-1.5 justify-end">
+                    <div className={`flex-none rounded-full p-1 ${game.goteResult === ResultStatus.DEFEATE ? 'bg-emerald-500/20' : 'bg-rose-500/20'}`}>
+                    <div className={`size-1.5 rounded-full ${game.goteResult === ResultStatus.DEFEATE ? 'bg-emerald-500' : 'bg-rose-500'}`} />
+                    </div>
+                </div>
+
+            {/* 後手 */}
+            <div className="flex items-center gap-x-4 justify-end">
+                <div className="text-right">
+                <p className="text-sm font-semibold text-gray-900">
+                    <a href={`/kishiList/${game.goteNumber}`} className="hover:underline">
+                    {game.goteName}
+                    </a>
+                </p>
+                </div>
+                <img
+                alt=""
+                src={`https://www.shogi.or.jp/images/player/pro/${game.goteNumber}.jpg`}
+                className="size-11 object-cover rounded-full bg-gray-50"
+                />
             </div>
+            <div className="text-right text-sm text-gray-500">{DateUtils.formatJapaneseDateWithWeekday(game.date)}</div>
             </li>
+
         ))}
         </ul>
         </div>
