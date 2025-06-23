@@ -70,6 +70,24 @@ export class DateUtils {
       return `${month}/${day}`;
     }
 
+    /**
+     * 短縮形式（例：6/24 18:30）
+     */
+    static formatShortDateTime(dateStr: string): string {
+      const date = new Date(dateStr.replace(' ', 'T')); // ISO 8601形式に変換
+    
+      if (isNaN(date.getTime())) return "不正な日付";
+    
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+    
+      return `${month}/${day} ${hours}:${minutes}`;
+    }
+    
+
+
     static formatJapaneseDateWithWeekday(dateStr: string): string {
       const date = new Date(dateStr);
       if (isNaN(date.getTime())) return "不正な日付";
