@@ -1,69 +1,7 @@
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { dummyPickedUpGames } from "../data/games";
-import { Link } from "react-router-dom";
-import { ResultStatus } from "../enum/ResultStatus";
 import { DateUtils } from "../utils/DateUtils";
-
-const people = [
-    {
-      name: 'Leslie Alexander',
-      email: 'leslie.alexander@example.com',
-      role: 'Co-Founder / CEO',
-      imageUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-      lastSeen: '3h ago',
-      lastSeenDateTime: '2023-01-23T13:23Z',
-    },
-    {
-      name: 'Michael Foster',
-      email: 'michael.foster@example.com',
-      role: 'Co-Founder / CTO',
-      imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-      lastSeen: '3h ago',
-      lastSeenDateTime: '2023-01-23T13:23Z',
-    },
-    {
-      name: 'Dries Vincent',
-      email: 'dries.vincent@example.com',
-      role: 'Business Relations',
-      imageUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-      lastSeen: null,
-    },
-    {
-      name: 'Lindsay Walton',
-      email: 'lindsay.walton@example.com',
-      role: 'Front-end Developer',
-      imageUrl:
-        'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-      lastSeen: '3h ago',
-      lastSeenDateTime: '2023-01-23T13:23Z',
-    },
-    {
-      name: 'Courtney Henry',
-      email: 'courtney.henry@example.com',
-      role: 'Designer',
-      imageUrl:
-        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-      lastSeen: '3h ago',
-      lastSeenDateTime: '2023-01-23T13:23Z',
-    },
-    {
-      name: 'Tom Cook',
-      email: 'tom.cook@example.com',
-      role: 'Director of Product',
-      imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-      lastSeen: null,
-    },
-  ]
+import { ResultStatusIcon } from "../componets/ResultStatusIcon";
+import { ResultStatus } from "../enum/ResultStatus";
 
 export default function Home() {
     return (
@@ -121,15 +59,29 @@ export default function Home() {
         </div>
 
         <div className="mt-6">
+            <div className="flex item-center text-center mt-4 mb-4 mr-4 px-4 justify-end space-x-4">
+                <div className="flex space-x-2">
+                    {ResultStatusIcon(ResultStatus.WIN)}
+                    <span className="size-1.5 text-xs text-gray-500">勝</span>
+                </div>
+                <div className="flex space-x-2">
+                    {ResultStatusIcon(ResultStatus.DEFEATE)}
+                    <span className="size-1.5 text-xs text-gray-500">負</span>
+                </div>
+                <div className="flex space-x-2">
+                    {ResultStatusIcon(ResultStatus.TBD)}
+                    <span className="size-1.5 text-xs text-gray-500">未</span>
+                </div>
+            </div>
         <ul
         role="list"
         className="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
         >
         {dummyPickedUpGames.map((game) => (
-            <li className="grid grid-cols-7 items-center px-4 py-5 hover:bg-gray-50 sm:px-6">
-            <div className="text-gray-500 text-sm">{game.gameName}</div>
+            <li className="grid grid-cols-13 items-center px-4 py-5 hover:bg-gray-50 sm:px-6">
+            <div className="col-span-2 text-gray-500 text-sm">{game.gameName}</div>
             {/* 先手 */}
-            <div className="flex items-center gap-x-4">
+            <div className="col-span-3 flex items-center gap-x-4 justify-center">
                 <img
                 alt=""
                 src={`https://www.shogi.or.jp/images/player/pro/${game.senteNumber}.jpg`}
@@ -144,37 +96,34 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="flex items-center gap-x-1.5">
-                    <div className={`flex-none rounded-full p-1 ${game.senteResult === ResultStatus.DEFEATE ? 'bg-emerald-500/20' : 'bg-rose-500/20'}`}>
-                    <div className={`size-1.5 rounded-full ${game.senteResult === ResultStatus.DEFEATE ? 'bg-emerald-500' : 'bg-rose-500'}`} />
-                    </div>
-                </div>
+            <div className="col-span-1 flex items-center gap-x-1.5">
+                {ResultStatusIcon(game.senteResult)}
+            </div>
 
             {/* vs */}
-            <div className="text-sm text-center font-medium text-gray-500">vs</div>
+            <div className="col-span-1 text-sm text-center font-medium text-gray-500">vs</div>
 
-            <div className="mt-1 flex items-center gap-x-1.5 justify-end">
-                    <div className={`flex-none rounded-full p-1 ${game.goteResult === ResultStatus.DEFEATE ? 'bg-emerald-500/20' : 'bg-rose-500/20'}`}>
-                    <div className={`size-1.5 rounded-full ${game.goteResult === ResultStatus.DEFEATE ? 'bg-emerald-500' : 'bg-rose-500'}`} />
-                    </div>
-                </div>
+            <div className="col-span-1 mt-1 flex items-center gap-x-1.5 justify-end">
+                {ResultStatusIcon(game.goteResult)}
+            </div>
 
             {/* 後手 */}
-            <div className="flex items-center gap-x-4 justify-end">
+            <div className="col-span-3 flex items-center gap-x-4 justify-center">
                 <div className="text-right">
-                <p className="text-sm font-semibold text-gray-900">
-                    <a href={`/kishiList/${game.goteNumber}`} className="hover:underline">
-                    {game.goteName}
-                    </a>
-                </p>
+                    <p className="text-sm font-semibold text-gray-900">
+                        <a href={`/kishiList/${game.goteNumber}`} className="hover:underline">
+                        {game.goteName}
+                        </a>
+                    </p>
                 </div>
                 <img
-                alt=""
-                src={`https://www.shogi.or.jp/images/player/pro/${game.goteNumber}.jpg`}
-                className="size-11 object-cover rounded-full bg-gray-50"
+                    alt=""
+                    src={`https://www.shogi.or.jp/images/player/pro/${game.goteNumber}.jpg`}
+                    className="size-11 object-cover rounded-full bg-gray-50"
                 />
             </div>
-            <div className="text-right text-sm text-gray-500">{DateUtils.formatJapaneseDateWithWeekday(game.date)}</div>
+            
+            <div className="col-span-2 text-right text-sm text-gray-500">{DateUtils.formatJapaneseDateWithWeekday(game.date)}</div>
             </li>
 
         ))}

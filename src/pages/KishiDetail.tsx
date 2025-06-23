@@ -1,19 +1,8 @@
 import { useParams } from 'react-router-dom'
 import type { Kishi } from '../types/kishi'
 import { dummyKishi } from '../data/kishis'
-import { getStatusIconAndStyle } from '../enum/ResultStatus'
 import { DateUtils } from '../utils/DateUtils'
-
-const user = {
-  name: 'Whitney Francis',
-  email: 'whitney@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-}
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+import { ResultStatusIcon } from '../componets/ResultStatusIcon'
 
 export default function Example() {
   const { kishiNumber } = useParams<{ kishiNumber: string }>()
@@ -236,37 +225,24 @@ export default function Example() {
                 {/* Activity Feed */}
                 <div className="mt-6 flow-root">
                 <ul role="list" className="-mb-8">
-                  {kishi.resultsFromKishi?.map((result) => {
-                    const { icon: StatusIcon, bgColor } = getStatusIconAndStyle(result.resultStatus);
-
-                    return (
-                      <li key={result.gameName}>
-                        <div className="relative pb-8">
-                          <div className="relative flex items-center space-x-3">
-                            <div>
-                              <span
-                                className={classNames(
-                                  bgColor,
-                                  'flex size-8 items-center justify-center rounded-full ring-8 ring-white',
-                                )}
-                              >
-                                <StatusIcon aria-hidden="true" className="size-5 text-white" />
-                              </span>
-                            </div>
-                            <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                              <div>
-                                <p className="text-sm font-medium text-gray-900">{result.gameName}</p>
-                                <p className="ml-4 text-xs text-gray-500">vs. {result.oponentName}</p>
-                              </div>
-                              <div className="whitespace-nowrap text-right text-sm text-gray-500">
-                                {DateUtils.formatShortDate(result.date)}
-                              </div>
-                            </div>
+                {kishi.resultsFromKishi?.map((result) => (
+                  <li key={result.gameName}>
+                    <div className="relative pb-8">
+                      <div className="relative flex items-center space-x-3">
+                        <div>{ResultStatusIcon(result.resultStatus)}</div>
+                        <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                          <div>
+                            <p className="text-sm font-medium text-gray-900">{result.gameName}</p>
+                            <p className="ml-4 text-xs text-gray-500">vs. {result.oponentName}</p>
+                          </div>
+                          <div className="whitespace-nowrap text-right text-sm text-gray-500">
+                            {DateUtils.formatShortDate(result.date)}
                           </div>
                         </div>
-                      </li>
-                    );
-                  })}
+                      </div>
+                    </div>
+                  </li>
+                ))}
                 </ul>
                 </div>
               </div>
