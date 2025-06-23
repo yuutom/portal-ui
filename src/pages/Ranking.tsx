@@ -26,11 +26,14 @@ import { JunisenClass } from '../enum/JunisenClass';
 import { PlayingStyle } from '../enum/PlayingStyle';
 import { Affiliation } from '../enum/Affiliation';
 import type { Kishi } from '../types/kishi';
+import { DateUtils } from '../utils/DateUtils';
 
 const sortOptions = [
   { name: "勝率"},
   { name: "勝数"},
   { name: "対局数"},
+  { name: "年齢"},
+  { name: "デビュー年齢"},
 ]
 const filters = [
   {
@@ -334,7 +337,7 @@ export default function Ranking() {
               <thead>
                 <tr>
                   <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                    名前
+                    名前 (年齢 / デビュー年齢)
                   </th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                     段位
@@ -375,7 +378,9 @@ export default function Ranking() {
                           <img alt="" src={kishi.imageUrl} className="size-11 object-cover rounded-full" />
                         </div>
                         <div className="ml-4">
-                          <div className="font-medium text-gray-900">{kishi.nameKana}</div>
+                          <div className="font-medium text-gray-900">{kishi.nameKana} 
+                            <span className="text-xs text-gray-500"> ({DateUtils.getCurrentAge(kishi.birthDate)}歳 / {DateUtils.getDebutAge(kishi.birthDate, kishi.debutDate)}歳)</span>
+                          </div>
                           <div className="mt-1 text-gray-500">{kishi.nameRome}</div>
                         </div>
                       </div>
@@ -402,6 +407,11 @@ export default function Ranking() {
                   </tr>
                 ))}
               </tbody>
+              <div>
+                <button className="mt-2 items-center block bg-gray-50 px-4 py-4 text-center text-sm font-medium text-gray-500 hover:text-gray-700 sm:rounded-b-lg cursor-pointer">
+                    全ての結果を表示する
+                </button>
+              </div>
             </table>
           </div>
         </div>

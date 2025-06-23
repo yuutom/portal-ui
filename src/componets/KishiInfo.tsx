@@ -19,7 +19,7 @@ export default function KishiInfo({kishi}: KishiInfoProps) {
               </div>
               <p className="mt-1 truncate text-sm text-gray-500">{kishi.nameRome}</p>
             </div>
-            <img alt="" src={kishi.imageUrl} className="h-20 w-auto shrink-0 rounded-full bg-gray-300" />
+            <img alt="" src={kishi.imageUrl} className="size-16 object-cover rounded-full bg-gray-300" />
           </div>
           {Array.isArray(kishi.title) && (
             <div className="text-center justify-between space-x-2 p-2">

@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import type { Kishi } from '../types/kishi'
 import { dummyKishi } from '../data/kishis'
 import { getStatusIconAndStyle } from '../enum/ResultStatus'
+import { DateUtils } from '../utils/DateUtils'
 
 const user = {
   name: 'Whitney Francis',
@@ -12,57 +13,6 @@ const user = {
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
-}
-
-function getCurrentAge(birthDate: string): number | null {
-  const birth = new Date(birthDate);
-  const today = new Date();
-  let age = today.getFullYear() - birth.getFullYear();
-
-  const hasBirthdayPassedThisYear =
-    today.getMonth() > birth.getMonth() ||
-    (today.getMonth() === birth.getMonth() && today.getDate() >= birth.getDate());
-
-  if (!hasBirthdayPassedThisYear) {
-    age -= 1;
-  }
-
-  return age;
-}
-
-function getDebutAge(birthDate: string, debutDate: string): number | null {
-  const birth = new Date(birthDate);
-  const debut = new Date(debutDate);
-  let age = debut.getFullYear() - birth.getFullYear();
-
-  const hasBirthdayPassedThisYear =
-    debut.getMonth() > birth.getMonth() ||
-    (debut.getMonth() === birth.getMonth() && debut.getDate() >= birth.getDate());
-
-  if (!hasBirthdayPassedThisYear) {
-    age -= 1;
-  }
-
-  return age;
-}
-
-
-function formatJapaneseDate(dateStr: string): string {
-  const date = new Date(dateStr);
-  if (isNaN(date.getTime())) return '不正な日付';
-
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1; // 0始まりなので+1
-  const day = date.getDate();
-
-  return `${year}年${month}月${day}日`;
-}
-
-function formatShortDate(dateString: string): string {
-  const date = new Date(dateString);
-  const month = date.getMonth() + 1; // 月は0始まりなので +1
-  const day = date.getDate();
-  return `${month}/${day}`;
 }
 
 export default function Example() {
@@ -105,7 +55,8 @@ export default function Example() {
               </div>
               <div className="ml-4">
                 <div className="flex items-center space-x-2">
-                  <h1 className="text-4xl font-bold text-gray-900">{kishi?.nameKana}</h1>
+                  <h1 className="text-3xl font-bold text-gray-900">{kishi?.nameKana}</h1>
+                  <h1 className="text-2xl font-bold text-gray-500">({DateUtils.getCurrentAge(kishi.birthDate)})</h1>
                   <div className="ml-2 space-x-2">
                   {displayTitle.map((title) => (
                   <span className="inline-flex shrink-0 rounded-full bg-green-50 px-4.5 py-1.5 font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
@@ -114,6 +65,7 @@ export default function Example() {
                   ))}
                   </div>
                 </div>
+                <div className="mt-1 text-gray-500">{kishi.nameRome}</div>
               </div>
             </div>
             <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
@@ -162,11 +114,11 @@ export default function Example() {
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">生年月日</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{formatJapaneseDate(kishi.birthDate)}（{getCurrentAge(kishi.birthDate)}歳）</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{DateUtils.formatJapaneseDate(kishi.birthDate)}（{DateUtils.getCurrentAge(kishi.birthDate)}歳）</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">デビュー年月日</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{formatJapaneseDate(kishi.debutDate)}（{getDebutAge(kishi.birthDate, kishi.debutDate)}歳）</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{DateUtils.formatJapaneseDate(kishi.debutDate)}（{DateUtils.getDebutAge(kishi.birthDate, kishi.debutDate)}歳）</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">所属</dt>
@@ -307,7 +259,7 @@ export default function Example() {
                                 <p className="ml-4 text-xs text-gray-500">vs. {result.oponentName}</p>
                               </div>
                               <div className="whitespace-nowrap text-right text-sm text-gray-500">
-                                {formatShortDate(result.date)}
+                                {DateUtils.formatShortDate(result.date)}
                               </div>
                             </div>
                           </div>
