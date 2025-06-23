@@ -10,6 +10,7 @@ export enum ResultStatus {
   DEFEATE = "負け",
   BYE_WIN = "不戦勝",
   BYE_DEFEATE = "不戦敗",
+  TBD = "未実施"
 }
 
 export function getStatusIconAndStyle(status: ResultStatus) {

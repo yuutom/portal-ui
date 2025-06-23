@@ -407,11 +407,12 @@ export default function Ranking() {
                   </tr>
                 ))}
               </tbody>
-              <div>
-                <button className="mt-2 items-center block bg-gray-50 px-4 py-4 text-center text-sm font-medium text-gray-500 hover:text-gray-700 sm:rounded-b-lg cursor-pointer">
-                    全ての結果を表示する
-                </button>
-              </div>
+              <a
+        href="#"
+        className="flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+      >
+        View all
+      </a>
             </table>
           </div>
         </div>
