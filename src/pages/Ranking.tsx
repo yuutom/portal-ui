@@ -21,47 +21,51 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { dummyKishi } from '../data/kishis'
+import { RyuohsenClass } from '../enum/RyuohsenClass';
+import { JunisenClass } from '../enum/JunisenClass';
+import { PlayingStyle } from '../enum/PlayingStyle';
+import { Affiliation } from '../enum/Affiliation';
+import type { Kishi } from '../types/kishi';
 
 const sortOptions = [
-  { name: 'Most Popular'},
-  { name: 'Best Rating'},
-  { name: 'Newest'},
+  { name: "勝率"},
+  { name: "勝数"},
+  { name: "対局数"},
 ]
 const filters = [
   {
-    id: 'category',
-    name: 'Category',
+    id: "ryuohsen",
+    name: "竜王戦",
     options: [
-      { value: 'tees', label: 'Tees' },
-      { value: 'crewnecks', label: 'Crewnecks' },
-      { value: 'hats', label: 'Hats' },
+      { value: RyuohsenClass.RYUOH, label: RyuohsenClass.RYUOH },
+      { value: RyuohsenClass.CLASS_1, label: RyuohsenClass.CLASS_1 },
+      { value: RyuohsenClass.CLASS_2, label: RyuohsenClass.CLASS_2 },
     ],
   },
   {
-    id: 'brand',
-    name: 'Brand',
+    id: "junisen",
+    name: "順位戦",
     options: [
-      { value: 'clothing-company', label: 'Clothing Company' },
-      { value: 'fashion-inc', label: 'Fashion Inc.' },
-      { value: 'shoes-n-more', label: "Shoes 'n More" },
+      { value: JunisenClass.MEIJIN, label: JunisenClass.MEIJIN },
+      { value: JunisenClass.A, label: JunisenClass.A },
+      { value: JunisenClass.B1, label: JunisenClass.B1 },
     ],
   },
   {
-    id: 'color',
-    name: 'Color',
+    id: "playingStyle",
+    name: "棋風",
     options: [
-      { value: 'white', label: 'White' },
-      { value: 'black', label: 'Black' },
-      { value: 'grey', label: 'Grey' },
+      { value: PlayingStyle.IBISHA, label: PlayingStyle.IBISHA },
+      { value: PlayingStyle.HURIBISHA, label: PlayingStyle.HURIBISHA },
+      { value: PlayingStyle.DUAL, label: PlayingStyle.DUAL },
     ],
   },
   {
-    id: 'sizes',
-    name: 'Sizes',
+    id: "affiliation",
+    name: "所属",
     options: [
-      { value: 's', label: 'S' },
-      { value: 'm', label: 'M' },
-      { value: 'l', label: 'L' },
+      { value: Affiliation.KANTOU, label: Affiliation.KANTOU },
+      { value: Affiliation.KANSAI, label: Affiliation.KANSAI },
     ],
   },
 ]
@@ -70,7 +74,33 @@ export default function Ranking() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false)
   const [selectedFilters, setSelectedFilters] = useState<{ [key: string]: Set<string> }>({});
-  const [sortKey, setSortKey] = useState<string>("Most Popular ");
+  const [sortKey, setSortKey] = useState<string>("勝率");
+  const filteredData = dummyKishi
+  .filter((kishi) => {
+    return Object.entries(selectedFilters).every(([key, set]) => {
+      if (set.size === 0) return true;
+      const k = key as keyof Kishi;
+      return set.has(String(kishi[k]));
+    });
+  })
+  .sort((a, b) => {
+    const getWinRate = (k: typeof a) =>
+      k.record && k.record.wins + k.record.loses > 0
+        ? k.record.wins / (k.record.wins + k.record.loses)
+        : 0;
+
+    const getTotalGames = (k: typeof a) =>
+      (k.record?.wins || 0) + (k.record?.loses || 0);
+
+    if (sortKey === '勝率') {
+      return getWinRate(b) - getWinRate(a);
+    } else if (sortKey === '勝数') {
+      return (b.record?.wins || 0) - (a.record?.wins || 0);
+    } else if (sortKey === '対局数') {
+      return getTotalGames(b) - getTotalGames(a);
+    }
+    return 0;
+});
 
   return (
     <div>
@@ -189,12 +219,12 @@ export default function Ranking() {
                 <div className="py-1">
                   {sortOptions.map((option) => (
                     <MenuItem key={option.name}>
-                      <button
+                      <a
                         onClick={() => setSortKey(option.name)}
-                        className="block px-4 py-2 text-sm font-medium text-gray-900 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                        className="block px-4 py-2 text-sm font-medium text-gray-900 data-[focus]:bg-gray-100 data-[focus]:outline-none cursor-pointer"
                       >
                         {option.name}
-                      </button>
+                      </a>
                     </MenuItem>
                   ))}
                 </div>
@@ -219,11 +249,11 @@ export default function Ranking() {
                   <div>
                     <PopoverButton className="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                       <span>{section.name}</span>
-                      {sectionIdx === 0 ? (
-                        <span className="ml-1.5 rounded bg-gray-200 px-1.5 py-0.5 text-xs font-semibold tabular-nums text-gray-700">
-                          1
-                        </span>
-                      ) : null}
+                        {selectedFilters[section.id]?.size > 0 && (
+                            <span className="ml-1.5 rounded bg-gray-200 px-1.5 py-0.5 text-xs font-semibold tabular-nums text-gray-700">
+                            {selectedFilters[section.id]?.size}
+                            </span>
+                        )}
                       <ChevronDownIcon
                         aria-hidden="true"
                         className="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
@@ -333,7 +363,7 @@ export default function Ranking() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {dummyKishi.map((kishi) => (
+                {filteredData.map((kishi) => (
                     <tr
                     key={kishi.kishiNumber}
                     onClick={() => navigate(`/kishiList/${kishi.kishiNumber}`)}

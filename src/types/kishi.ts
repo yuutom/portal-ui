@@ -1,5 +1,7 @@
 import type { Affiliation } from "../enum/Affiliation";
+import type { JunisenClass } from "../enum/JunisenClass";
 import type { PlayingStyle } from "../enum/PlayingStyle";
+import type { RyuohsenClass } from "../enum/RyuohsenClass";
 import type { KishiRecord } from "./kishiRecord";
 import type { ResultFromKishi } from "./resultFromKishi";
 
@@ -13,8 +15,8 @@ export interface Kishi {
     debutDate: string;
     birthPlace: string;
     master: string;
-    ryuohsen: string;
-    junisen: string;
+    ryuohsen: RyuohsenClass;
+    junisen: JunisenClass;
     danni: string;
     title?: string[];
     affiliation?: Affiliation;

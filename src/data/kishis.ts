@@ -1,7 +1,9 @@
 import { Affiliation } from "../enum/Affiliation";
 import { GameCategory } from "../enum/GameCategory";
+import { JunisenClass } from "../enum/JunisenClass";
 import { PlayingStyle } from "../enum/PlayingStyle";
 import { ResultStatus } from "../enum/ResultStatus";
+import { RyuohsenClass } from "../enum/RyuohsenClass";
 import type { Kishi } from "../types/kishi";
 
 export const dummyKishi: Kishi[] = [
@@ -15,8 +17,8 @@ export const dummyKishi: Kishi[] = [
         debutDate: "2020-10-01",
         birthPlace: "東京都世田谷区",
         master: "宮田利男八段",
-        ryuohsen: "1組",
-        junisen: "B級1組",
+        ryuohsen: RyuohsenClass.CLASS_1,
+        junisen: JunisenClass.B1,
         danni: "八段",
         title: ["叡王"],
         affiliation: Affiliation.KANTOU,
@@ -75,12 +77,13 @@ export const dummyKishi: Kishi[] = [
         debutDate: "2016-10-01",
         birthPlace: "愛知県瀬戸市",
         master: "杉本昌隆八段",
-        ryuohsen: "竜王",
-        junisen: "名人",
+        ryuohsen: RyuohsenClass.RYUOH,
+        junisen: JunisenClass.MEIJIN,
         danni: "九段",
         title: ["名人", "竜王", "王位", "王座", "棋聖", "棋王", "王将"],
         affiliation: Affiliation.KANSAI,
-        playingStyle: PlayingStyle.IBISHA
+        playingStyle: PlayingStyle.IBISHA,
+        record: {wins: 10, loses: 1, total_ranking: 1, wins_ranking: 1, winning_rate_ranking: 1}
     },
     {
         id: 3,
@@ -92,10 +95,11 @@ export const dummyKishi: Kishi[] = [
         debutDate: "2010-04-01",
         birthPlace: "岡山県岡山市",
         master: "井上慶太九段",
-        ryuohsen: "1組",
-        junisen: "B級1組",
+        ryuohsen: RyuohsenClass.CLASS_1,
+        junisen: JunisenClass.B1,
         danni: "八段",
         affiliation: Affiliation.KANSAI,
-        playingStyle: PlayingStyle.HURIBISHA
+        playingStyle: PlayingStyle.HURIBISHA,
+        record: {wins: 2, loses: 9, total_ranking: 20, wins_ranking: 20, winning_rate_ranking: 20}
     },
 ]
