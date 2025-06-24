@@ -2,7 +2,6 @@ import { dummyPickedUpGames } from "../data/games";
 import { DateUtils } from "../utils/DateUtils";
 import { ResultStatusIcon } from "../componets/ResultStatusIcon";
 import { ResultStatus } from "../enum/ResultStatus";
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { dummyArticles } from "../data/articles";
 
 export default function Home() {
@@ -60,7 +59,7 @@ export default function Home() {
         <h3 className="text-base font-semibold text-gray-900">注目の対局</h3>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 mx-auto max-w-screen-lg">
             <div className="flex item-center text-center mt-4 mb-4 mr-4 px-4 justify-end space-x-4">
                 <div className="flex space-x-2">
                     {ResultStatusIcon(ResultStatus.WIN)}
@@ -136,16 +135,16 @@ export default function Home() {
         <h3 className="text-base font-semibold text-gray-900">記事一覧</h3>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 mx-auto max-w-screen-lg">
         <ul
         role="list"
         className="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
         >
         {dummyArticles.map((article) => (
-            <li key={article.id} className="relative flex items-center justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
+            <li key={article.id} className="relative items-center justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
                 <div className="flex min-w-0 gap-x-4 items-center">
                     <div className="min-w-0 flex-auto">
-                    <p className="text-sm/6 font-semibold text-gray-900">
+                    <p className="text-base font-semibold text-gray-900">
                         <a href="#">
                         <span className="absolute inset-x-0 -top-px bottom-0" />
                         {article.title}
@@ -153,16 +152,35 @@ export default function Home() {
                     </p>
                     </div>
                 </div>
-                <div className="flex shrink-0 items-center gap-x-4">
-                    <div className="flex items-center gap-x-2 text-gray-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                {/* サムネ + 本文 + 投稿日 */}
+                <div className="mt-3 flex gap-x-4 items-start">
+                    <img
+                    src={article.imageUrl}
+                    alt=""
+                    className="w-30 h-auto rounded object-cover flex-none bg-gray-100"
+                    />
+                    <div className="flex-1 min-w-0 flex flex-col justify-between">
+                    <p className="px-4 text-sm text-gray-500 line-clamp-2">{article.content}</p>
+                    <div className="mt-4 mr-4 flex items-center justify-end gap-x-2 text-gray-500">
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="size-4 sm:size-5"
+                        >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
                         </svg>
-                        <span className="text-xs/5 text-gray-500">
+                        <span className="text-xs text-gray-500">
                         {DateUtils.formatShortDateTime(article.createdDate)}
                         </span>
                     </div>
-                    <ChevronRightIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
+                    </div>
                 </div>
             </li>
         ))}
