@@ -90,7 +90,7 @@ export default function Home() {
                 />
                 <div className="flex">
                 <p className="text-sm font-semibold text-gray-900">
-                    <a href={`/kishiList/${game.senteNumber}`} className="hover:underline">
+                    <a href={`/players/${game.senteNumber}`} className="hover:underline">
                     {game.senteName}
                     </a>
                 </p>
@@ -112,7 +112,7 @@ export default function Home() {
             <div className="col-span-3 flex items-center gap-x-4 justify-center">
                 <div className="text-right">
                     <p className="text-sm font-semibold text-gray-900">
-                        <a href={`/kishiList/${game.goteNumber}`} className="hover:underline">
+                        <a href={`/players/${game.goteNumber}`} className="hover:underline">
                         {game.goteName}
                         </a>
                     </p>

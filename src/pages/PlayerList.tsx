@@ -1,7 +1,7 @@
 import KishiInfo from '../componets/KishiInfo'
 import { dummyKishi } from '../data/kishis'
 
-export default function KishiList() {
+export default function PlayerList() {
   return (
     <main>
     {dummyKishi.filter((kishi) => kishi.title != undefined).length > 0 && (

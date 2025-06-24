@@ -1,21 +1,21 @@
 import { useParams } from 'react-router-dom'
-import type { Kishi } from '../types/kishi'
+import type { Player } from '../types/player'
 import { dummyKishi } from '../data/kishis'
 import { DateUtils } from '../utils/DateUtils'
 import { ResultStatusIcon } from '../componets/ResultStatusIcon'
 
 export default function Example() {
   const { kishiNumber } = useParams<{ kishiNumber: string }>()
-  const kishi: Kishi | undefined = dummyKishi.find(
+  const player: Player | undefined = dummyKishi.find(
     (k) => String(k.kishiNumber) === kishiNumber
   )
-  if (!kishi) {
+  if (!player) {
     return <div className="p-8 text-gray-500">棋士が見つかりません</div>
   }
   const displayTitle: string[] =
-  Array.isArray(kishi?.title) && kishi.title.length > 0
-    ? kishi.title
-    : [kishi?.danni ?? ''];
+  Array.isArray(player?.title) && player.title.length > 0
+    ? player.title
+    : [player?.danni ?? ''];
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function Example() {
                 <div className="relative">
                   <img
                     alt=""
-                    src={kishi?.imageUrl}
+                    src={player?.imageUrl}
                     className="h-40 w-auto rounded-full"
                   />
                   <span aria-hidden="true" className="absolute inset-0 rounded-full shadow-inner" />
@@ -44,8 +44,8 @@ export default function Example() {
               </div>
               <div className="ml-4">
                 <div className="flex items-center space-x-2">
-                  <h1 className="text-3xl font-bold text-gray-900">{kishi?.nameKana}</h1>
-                  <h1 className="text-2xl font-bold text-gray-500">({DateUtils.getCurrentAge(kishi.birthDate)})</h1>
+                  <h1 className="text-3xl font-bold text-gray-900">{player?.nameKana}</h1>
+                  <h1 className="text-2xl font-bold text-gray-500">({DateUtils.getCurrentAge(player.birthDate)})</h1>
                   <div className="ml-2 space-x-2">
                   {displayTitle.map((title) => (
                   <span className="inline-flex shrink-0 rounded-full bg-green-50 px-4.5 py-1.5 font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
@@ -54,7 +54,7 @@ export default function Example() {
                   ))}
                   </div>
                 </div>
-                <div className="mt-1 text-gray-500">{kishi.nameRome}</div>
+                <div className="mt-1 text-gray-500">{player.nameRome}</div>
               </div>
             </div>
             <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
@@ -87,43 +87,43 @@ export default function Example() {
                     <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">棋士番号</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{kishi?.kishiNumber}</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{player?.kishiNumber}</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">出身地</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{kishi?.birthPlace}</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{player?.birthPlace}</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">段位</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{kishi.danni}</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{player.danni}</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">師匠</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{kishi?.master}</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{player?.master}</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">生年月日</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{DateUtils.formatJapaneseDate(kishi.birthDate)}（{DateUtils.getCurrentAge(kishi.birthDate)}歳）</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{DateUtils.formatJapaneseDate(player.birthDate)}（{DateUtils.getCurrentAge(player.birthDate)}歳）</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">デビュー年月日</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{DateUtils.formatJapaneseDate(kishi.debutDate)}（{DateUtils.getDebutAge(kishi.birthDate, kishi.debutDate)}歳）</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{DateUtils.formatJapaneseDate(player.debutDate)}（{DateUtils.getDebutAge(player.birthDate, player.debutDate)}歳）</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">所属</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{kishi.affiliation}</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{player.affiliation}</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">棋風</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{kishi.playingStyle}</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{player.playingStyle}</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">順位戦</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{kishi?.junisen}</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{player?.junisen}</dd>
                       </div>
                       <div className="sm:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">竜王戦</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{kishi?.ryuohsen}</dd>
+                        <dd className="mt-1 text-sm text-gray-900">{player?.ryuohsen}</dd>
                       </div>
                       <div className="sm:col-span-2">
                         <dt className="text-sm font-medium text-gray-500">紹介</dt>
@@ -157,7 +157,7 @@ export default function Example() {
                                   <div className="absolute bottom-0 right-full h-px w-screen bg-gray-100" />
                                   <div className="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
                                 </td>
-                                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{kishi.record?.wins}勝{kishi.record?.loses}敗</td>
+                                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{player.record?.wins}勝{player.record?.loses}敗</td>
                               </tr>
                               <tr>
                                 <td className="relative py-4 pr-3 text-sm font-medium text-gray-900">
@@ -166,9 +166,9 @@ export default function Example() {
                                   <div className="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
                                 </td>
                                 <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-                                {kishi.record && (kishi.record.wins + kishi.record.loses > 0) ? (
+                                {player.record && (player.record.wins + player.record.loses > 0) ? (
                                   <>
-                                  {((kishi.record.wins / (kishi.record.wins + kishi.record.loses))).toFixed(4)} ({kishi.record?.winning_rate_ranking}位)
+                                  {((player.record.wins / (player.record.wins + player.record.loses))).toFixed(4)} ({player.record?.winning_rate_ranking}位)
                                   </>
                                 ) : (
                                   "-"
@@ -182,9 +182,9 @@ export default function Example() {
                                   <div className="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
                                 </td>
                                 <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-                                {kishi.record && (kishi.record.wins + kishi.record.loses > 0) ? (
+                                {player.record && (player.record.wins + player.record.loses > 0) ? (
                                   <>
-                                  {(kishi.record.wins + kishi.record.loses)}局 ({kishi.record?.total_ranking}位)
+                                  {(player.record.wins + player.record.loses)}局 ({player.record?.total_ranking}位)
                                   </>
                                 ) : (
                                   "-"
@@ -198,9 +198,9 @@ export default function Example() {
                                   <div className="absolute bottom-0 left-0 h-px w-screen bg-gray-100" />
                                 </td>
                                 <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-                                {kishi.record && (kishi.record.wins > 0) ? (
+                                {player.record && (player.record.wins > 0) ? (
                                   <>
-                                  {kishi.record.wins}勝 ({kishi.record?.wins_ranking}位)
+                                  {player.record.wins}勝 ({player.record?.wins_ranking}位)
                                   </>
                                 ) : (
                                   "-"
@@ -225,7 +225,7 @@ export default function Example() {
                 {/* Activity Feed */}
                 <div className="mt-6 flow-root">
                 <ul role="list" className="-mb-8">
-                {kishi.resultsFromKishi?.map((result) => (
+                {player.resultsFromKishi?.map((result) => (
                   <li key={result.gameName}>
                     <div className="relative pb-8">
                       <div className="relative flex items-center space-x-3">

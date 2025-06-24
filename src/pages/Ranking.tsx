@@ -25,7 +25,7 @@ import { RyuohsenClass } from '../enum/RyuohsenClass';
 import { JunisenClass } from '../enum/JunisenClass';
 import { PlayingStyle } from '../enum/PlayingStyle';
 import { Affiliation } from '../enum/Affiliation';
-import type { Kishi } from '../types/kishi';
+import type { Player } from '../types/player';
 import { DateUtils } from '../utils/DateUtils';
 
 const sortOptions = [
@@ -82,7 +82,7 @@ export default function Ranking() {
   .filter((kishi) => {
     return Object.entries(selectedFilters).every(([key, set]) => {
       if (set.size === 0) return true;
-      const k = key as keyof Kishi;
+      const k = key as keyof Player;
       return set.has(String(kishi[k]));
     });
   })
@@ -369,7 +369,7 @@ export default function Ranking() {
                 {filteredData.map((kishi) => (
                     <tr
                     key={kishi.kishiNumber}
-                    onClick={() => navigate(`/kishiList/${kishi.kishiNumber}`)}
+                    onClick={() => navigate(`/players/${kishi.kishiNumber}`)}
                     className="cursor-pointer hover:bg-gray-100"
                     >
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">

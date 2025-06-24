@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import KishiList from './pages/KishiList';
+import PlayerList from './pages/PlayerList';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import 'preline'
@@ -34,8 +34,8 @@ export default function Example() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="kishiList" element={<KishiList />} />
-          <Route path="kishiList/:kishiNumber" element={<KishiDetail />} />
+          <Route path="players" element={<PlayerList />} />
+          <Route path="players/:kishiNumber" element={<KishiDetail />} />
           <Route path="ranking" element={<Ranking />} />
         </Route>
       </Routes>

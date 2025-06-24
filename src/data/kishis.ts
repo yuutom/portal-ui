@@ -1,12 +1,13 @@
 import { Affiliation } from "../enum/Affiliation";
 import { GameCategory } from "../enum/GameCategory";
 import { JunisenClass } from "../enum/JunisenClass";
+import { PlayerCategory } from "../enum/PlayerCategory";
 import { PlayingStyle } from "../enum/PlayingStyle";
 import { ResultStatus } from "../enum/ResultStatus";
 import { RyuohsenClass } from "../enum/RyuohsenClass";
-import type { Kishi } from "../types/kishi";
+import type { Player } from "../types/player";
 
-export const dummyKishi: Kishi[] = [
+export const dummyKishi: Player[] = [
     {
         id: 1,
         kishiNumber: 324,
@@ -65,7 +66,9 @@ export const dummyKishi: Kishi[] = [
                 date: "2025-06-24"
             },
         ],
-        record: {wins: 5, loses: 3, total_ranking: 15, wins_ranking: 17, winning_rate_ranking: 10}
+        record: {wins: 5, loses: 3, total_ranking: 15, wins_ranking: 17, winning_rate_ranking: 10},
+        playerCategory: PlayerCategory.KISHI,
+        isActive: true,
     },
     {
         id: 2,
@@ -83,7 +86,9 @@ export const dummyKishi: Kishi[] = [
         title: ["名人", "竜王", "王位", "王座", "棋聖", "棋王", "王将"],
         affiliation: Affiliation.KANSAI,
         playingStyle: PlayingStyle.IBISHA,
-        record: {wins: 10, loses: 1, total_ranking: 1, wins_ranking: 1, winning_rate_ranking: 1}
+        record: {wins: 10, loses: 1, total_ranking: 1, wins_ranking: 1, winning_rate_ranking: 1},
+        playerCategory: PlayerCategory.KISHI,
+        isActive: true,
     },
     {
         id: 3,
@@ -100,6 +105,8 @@ export const dummyKishi: Kishi[] = [
         danni: "八段",
         affiliation: Affiliation.KANSAI,
         playingStyle: PlayingStyle.HURIBISHA,
-        record: {wins: 2, loses: 9, total_ranking: 20, wins_ranking: 20, winning_rate_ranking: 20}
+        record: {wins: 2, loses: 9, total_ranking: 20, wins_ranking: 20, winning_rate_ranking: 20},
+        playerCategory: PlayerCategory.KISHI,
+        isActive: true,
     },
 ]

@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import type { Kishi } from "../types/kishi";
+import type { Player } from "../types/player";
 
 interface KishiInfoProps {
-    kishi: Kishi;
+    kishi: Player;
 }
 
 export default function KishiInfo({kishi}: KishiInfoProps) {
     return (
-        <Link to={`/kishiList/${kishi.kishiNumber}`}>
+        <Link to={`/players/${kishi.kishiNumber}`}>
         <li key={kishi.kishiNumber} className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow hover:bg-gray-100 transition-colors duration-200">
           <div className="flex w-full items-center justify-between space-x-6 p-6">
             <div className="flex-1 truncate">

@@ -12,7 +12,7 @@ const user = {
 
 const navItems = [
   { name: 'Home', href: '/', current: true },
-  { name: '棋士一覧', href: '/kishiList', current: false },
+  { name: '棋士一覧', href: '/players', current: false },
   { name: 'ランキング', href: '/ranking', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Reports', href: '#', current: false },
