@@ -375,7 +375,7 @@ export default function Ranking() {
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                       <div className="flex items-center">
                         <div className="size-11 shrink-0">
-                          <img alt="" src={kishi.imageUrl} className="size-11 object-cover rounded-full" />
+                          <img alt="" src={kishi.imageUrl} className="ml-2 size-11 object-cover rounded-full" />
                         </div>
                         <div className="ml-4">
                           <div className="font-medium text-gray-900">{kishi.nameKana} 
@@ -407,12 +407,6 @@ export default function Ranking() {
                   </tr>
                 ))}
               </tbody>
-              <a
-        href="#"
-        className="flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
-      >
-        View all
-      </a>
             </table>
           </div>
         </div>

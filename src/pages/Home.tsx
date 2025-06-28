@@ -22,14 +22,16 @@ export default function Home() {
                 <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
                 {pickedUpArticles.map((article) => (
                     <div key={article.id} className="hs-carousel-slide w-full">
-                    <div className="flex flex-col items-center justify-center h-full bg-gray-100 px-4 py-6 text-center">
-                        <img
-                        src={article.imageUrl}
-                        alt={article.title}
-                        className="h-full w-auto object-cover rounded-md mb-4"
-                        />
-                        <h2 className="text-xl font-semibold text-gray-800">{article.title}</h2>
-                    </div>
+                    <a href={`/articles/${article.id}`}>
+                        <div className="flex flex-col items-center justify-center h-full bg-gray-100 px-4 py-6 text-center">
+                            <img
+                            src={article.imageUrl}
+                            alt={article.title}
+                            className="h-full w-auto object-cover rounded-md mb-4"
+                            />
+                            <h2 className="mb-2 text-xl font-semibold text-gray-800">{article.title}</h2>
+                        </div>
+                    </a>
                     </div>
                 ))}
                 </div>
@@ -57,11 +59,18 @@ export default function Home() {
         {/* End Slider */}
         </div>
 
-        <div className="border-b border-gray-200 pb-5 mt-10">
-        <h3 className="text-base font-semibold text-gray-900">注目の対局</h3>
+        <div className="mt-20 max-w-screen-md mx-auto">
+            <div className="relative">
+                <div aria-hidden="true" className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-300" />
+                </div>
+                <div className="relative flex justify-center">
+                    <span className="bg-white px-3 text-base font-semibold text-gray-900">注目の対局</span>
+                </div>
+            </div>
         </div>
 
-        <div className="mt-6 mx-auto max-w-screen-lg">
+        <div className="mt-6 mx-auto max-w-screen-md">
             <div className="flex item-center text-center mt-4 mb-4 mr-4 px-4 justify-end space-x-4">
                 <div className="flex space-x-2">
                     {ResultStatusIcon(ResultStatus.WIN)}
@@ -133,11 +142,18 @@ export default function Home() {
         </ul>
         </div>
 
-        <div className="border-b border-gray-200 pb-5 mt-10">
-        <h3 className="text-base font-semibold text-gray-900">記事一覧</h3>
+        <div className="mt-20 max-w-screen-md mx-auto">
+            <div className="relative">
+                <div aria-hidden="true" className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-300" />
+                </div>
+                <div className="relative flex justify-center">
+                    <span className="bg-white px-3 text-base font-semibold text-gray-900">記事一覧</span>
+                </div>
+            </div>
         </div>
 
-        <div className="mt-6 mx-auto max-w-screen-lg">
+        <div className="mt-6 mx-auto max-w-screen-md">
         <ul
         role="list"
         className="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
