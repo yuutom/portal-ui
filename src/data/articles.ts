@@ -16,7 +16,7 @@ export const dummyArticles: Article[] = [
         imageUrl: "https://www.shogi.or.jp/adcontroll/slider_eiou10_05.jpg",
         isPickedUp: true,
         createdDate: "2025-06-25 18:30:30"
-    },    
+    },
     {
         id: 3,
         title: "西山朋佳女王VS福間香奈女流五冠 第18期マイナビ女子オープン五番勝負第5局 福間女流五冠の勝利",
