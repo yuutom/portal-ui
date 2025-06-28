@@ -5,32 +5,34 @@ import { ResultStatus } from "../enum/ResultStatus";
 import { dummyArticles } from "../data/articles";
 
 export default function Home() {
+    const pickedUpArticles = dummyArticles
+    .filter((article) => article.isPickedUp)
+    .sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())
+    .slice(0, 3);
+
     return (
         <main className="py-10">
         <div className="mx-auto max-w-4xl px-4">
         {/* Slider */}
-        <div data-hs-carousel='{
+        <div className="relative" data-hs-carousel='{
             "loadingClasses": "opacity-0",
             "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer"
-            }' className="relative">
+            }'>
             <div className="hs-carousel relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
-            <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-                <div className="hs-carousel-slide">
-                <div className="flex justify-center h-full bg-gray-100 p-6">
-                    <span className="self-center text-4xl text-gray-800 transition duration-700">First slide</span>
+                <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                {pickedUpArticles.map((article) => (
+                    <div key={article.id} className="hs-carousel-slide w-full">
+                    <div className="flex flex-col items-center justify-center h-full bg-gray-100 px-4 py-6 text-center">
+                        <img
+                        src={article.imageUrl}
+                        alt={article.title}
+                        className="h-full w-auto object-cover rounded-md mb-4"
+                        />
+                        <h2 className="text-xl font-semibold text-gray-800">{article.title}</h2>
+                    </div>
+                    </div>
+                ))}
                 </div>
-                </div>
-                <div className="hs-carousel-slide">
-                <div className="flex justify-center h-full bg-gray-200 p-6">
-                    <span className="self-center text-4xl text-gray-800 transition duration-700">Second slide</span>
-                </div>
-                </div>
-                <div className="hs-carousel-slide">
-                <div className="flex justify-center h-full bg-gray-300 p-6">
-                    <span className="self-center text-4xl text-gray-800 transition duration-700">Third slide</span>
-                </div>
-                </div>
-            </div>
             </div>
 
             <button type="button" className="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:cursor-default absolute top-1/2 start-2 inline-flex justify-center items-center size-10 bg-white border border-gray-100 text-gray-800 rounded-full shadow-2xs hover:bg-gray-100 -translate-y-1/2 focus:outline-hidden">
