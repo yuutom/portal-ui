@@ -14,7 +14,7 @@ const navItems = [
   { name: 'Home', href: '/', current: true },
   { name: '棋士一覧', href: '/players', current: false },
   { name: 'ランキング', href: '/ranking', current: false },
-  { name: 'Projects', href: '#', current: false },
+  { name: 'おすすめ棋書', href: '/books', current: false },
   { name: '記事一覧', href: '/articles', current: false },
 ];
 
