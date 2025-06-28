@@ -15,7 +15,7 @@ const navItems = [
   { name: '棋士一覧', href: '/players', current: false },
   { name: 'ランキング', href: '/ranking', current: false },
   { name: 'Projects', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
+  { name: '記事一覧', href: '/articles', current: false },
 ];
 
 const userNavigation = [
