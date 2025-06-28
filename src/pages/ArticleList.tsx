@@ -1,11 +1,26 @@
-import { useParams } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { dummyArticles } from '../data/articles'
 import { DateUtils } from '../utils/DateUtils'
+import type { Article } from '../types/article'
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search)
+}
 
 export default function ArticleList() {
-  const { id } = useParams<{ id: string }>()
 
+  const navigate = useNavigate()
+  const handleCategoryClick = (category: string) => {
+    navigate(`/articles?category=${encodeURIComponent(category)}`)
+  }
   const categories: string[] = ["棋士・棋戦", "勉強", "雑学", "エンタメ"]
+
+  const query = useQuery()
+  const selectedCategory = query.get('category')
+
+  const filteredArticles: Article[] = selectedCategory
+    ? dummyArticles.filter((article) => article.category === selectedCategory)
+    : dummyArticles
 
   return (
     <>
@@ -27,7 +42,7 @@ export default function ArticleList() {
                 role="list"
                 className="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
                 >
-                {dummyArticles.map((article) => (
+                {filteredArticles.map((article) => (
                     <li key={article.id} className="relative items-center justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
                         <div className="flex min-w-0 gap-x-4 items-center">
                             <div className="min-w-0 flex-auto">
@@ -85,7 +100,7 @@ export default function ArticleList() {
                 <ul role="list" className="space-y-2">
                   {categories.map((category) => (
                     <li key={category}>
-                      <button className="w-full text-left px-3 py-2 rounded-md hover:bg-gray-100 cursor-pointer text-sm font-medium text-blue-600">
+                      <button onClick={() => handleCategoryClick(category)} className="w-full text-left px-3 py-2 rounded-md hover:bg-gray-100 cursor-pointer text-sm font-medium text-blue-600">
                         {category}
                       </button>
                     </li>

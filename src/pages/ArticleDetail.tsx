@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { dummyArticles } from '../data/articles'
 import type { Article } from '../types/article'
 import { DateUtils } from '../utils/DateUtils'
@@ -11,8 +12,11 @@ export default function Article() {
   if (!article) {
     return <div className="p-8 text-gray-500">記事が見つかりません</div>
   }
-
   const categories: string[] = ["棋士・棋戦", "勉強", "雑学", "エンタメ"]
+  const navigate = useNavigate()
+  const handleCategoryClick = (category: string) => {
+    navigate(`/articles?category=${encodeURIComponent(category)}`)
+  }
 
   return (
     <>
@@ -35,7 +39,7 @@ export default function Article() {
                   <h1 className="text-2xl font-bold text-gray-900">{article.title}</h1>
                   <p className="mt-2 text-sm text-gray-500">
                     投稿日: {DateUtils.formatShortDateTime(article.createdDate)} / カテゴリ: 
-                    <span className="ml-1 text-blue-600 font-medium cursor-pointer">{article.category}</span>
+                    <button onClick={() => handleCategoryClick(article.category)} className="ml-1 text-blue-600 font-medium cursor-pointer">{article.category}</button>
                   </p>
                 </div>
                 <div className="border-t border-gray-200 px-6 py-6 sm:px-8">
@@ -64,7 +68,7 @@ export default function Article() {
                 <ul role="list" className="space-y-2">
                   {categories.map((category) => (
                     <li key={category}>
-                      <button className="w-full text-left px-3 py-2 rounded-md hover:bg-gray-100 cursor-pointer text-sm font-medium text-blue-600">
+                      <button onClick={() => handleCategoryClick(category)} className="w-full text-left px-3 py-2 rounded-md hover:bg-gray-100 cursor-pointer text-sm font-medium text-blue-600">
                         {category}
                       </button>
                     </li>
