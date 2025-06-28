@@ -145,7 +145,7 @@ export default function Home() {
                 <div className="flex min-w-0 gap-x-4 items-center">
                     <div className="min-w-0 flex-auto">
                     <p className="text-base font-semibold text-gray-900">
-                        <a href="#">
+                        <a href={`/articles/${article.id}`}>
                         <span className="absolute inset-x-0 -top-px bottom-0" />
                         {article.title}
                         </a>
