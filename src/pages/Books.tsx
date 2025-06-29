@@ -52,7 +52,7 @@ const tsumeBooksForBigginer = [
   
   export default function Books() {
     return (
-      <div className="bg-white py-24 sm:py-32">
+      <div className="bg-white py-12 sm:py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
             <h2 className="text-34l text-balance font-semibold tracking-tight text-gray-900 sm:text-5xl">
