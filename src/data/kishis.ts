@@ -1,10 +1,12 @@
 import { Affiliation } from "../enum/Affiliation";
+import { Danni } from "../enum/Danni";
 import { GameCategory } from "../enum/GameCategory";
 import { JunisenClass } from "../enum/JunisenClass";
 import { PlayerCategory } from "../enum/PlayerCategory";
 import { PlayingStyle } from "../enum/PlayingStyle";
 import { ResultStatus } from "../enum/ResultStatus";
 import { RyuohsenClass } from "../enum/RyuohsenClass";
+import { Title } from "../enum/Title";
 import type { Player } from "../types/player";
 
 export const dummyKishi: Player[] = [
@@ -18,10 +20,12 @@ export const dummyKishi: Player[] = [
         debutDate: "2020-10-01",
         birthPlace: "東京都世田谷区",
         master: "宮田利男八段",
-        ryuohsen: RyuohsenClass.CLASS_1,
-        junisen: JunisenClass.B1,
-        danni: "八段",
-        title: ["叡王"],
+        ryuohsen: "第37期竜王（1組以上：4期）",
+        junisen: "第83期名人（Ａ級以上：4期）",
+        ryuohsenClass: RyuohsenClass.CLASS_1,
+        junisenClass: JunisenClass.B1,
+        danni: Danni.DAN8,
+        title: [Title.EIOH],
         affiliation: Affiliation.KANTOU,
         playingStyle: PlayingStyle.IBISHA,
         resultsFromKishi: [
@@ -80,10 +84,12 @@ export const dummyKishi: Player[] = [
         debutDate: "2016-10-01",
         birthPlace: "愛知県瀬戸市",
         master: "杉本昌隆八段",
-        ryuohsen: RyuohsenClass.RYUOH,
-        junisen: JunisenClass.MEIJIN,
-        danni: "九段",
-        title: ["名人", "竜王", "王位", "王座", "棋聖", "棋王", "王将"],
+        ryuohsen: "第37期竜王（1組以上：4期）",
+        junisen: "第83期名人（Ａ級以上：4期）",
+        ryuohsenClass: RyuohsenClass.RYUOH,
+        junisenClass: JunisenClass.MEIJIN,
+        danni: Danni.DAN9,
+        title: [Title.MEIJIN, Title.RYUOH, Title.KIOH, Title.KISEI, Title.OUI, Title.OUSHO, Title.OUZA],
         affiliation: Affiliation.KANSAI,
         playingStyle: PlayingStyle.IBISHA,
         record: {wins: 10, loses: 1, total_ranking: 1, wins_ranking: 1, winning_rate_ranking: 1},
@@ -100,9 +106,12 @@ export const dummyKishi: Player[] = [
         debutDate: "2010-04-01",
         birthPlace: "岡山県岡山市",
         master: "井上慶太九段",
-        ryuohsen: RyuohsenClass.CLASS_1,
-        junisen: JunisenClass.B1,
-        danni: "八段",
+        ryuohsen: "第37期竜王（1組以上：4期）",
+        junisen: "第83期名人（Ａ級以上：4期）",
+        ryuohsenClass: RyuohsenClass.CLASS_1,
+        junisenClass: JunisenClass.B1,
+        danni: Danni.DAN8,
+        title: [],
         affiliation: Affiliation.KANSAI,
         playingStyle: PlayingStyle.HURIBISHA,
         record: {wins: 2, loses: 9, total_ranking: 20, wins_ranking: 20, winning_rate_ranking: 20},

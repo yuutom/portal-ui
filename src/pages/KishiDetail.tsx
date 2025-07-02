@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom'
 import type { Player } from '../types/player'
-import { dummyKishi } from '../data/kishis'
 import { DateUtils } from '../utils/DateUtils'
 import { ResultStatusIcon } from '../componets/ResultStatusIcon'
+import { jsonPlayers } from '../data/playersJson'
 
 export default function Example() {
   const { kishiNumber } = useParams<{ kishiNumber: string }>()
-  const player: Player | undefined = dummyKishi.find(
+  const player: Player | undefined = jsonPlayers.find(
     (k) => String(k.kishiNumber) === kishiNumber
   )
   if (!player) {

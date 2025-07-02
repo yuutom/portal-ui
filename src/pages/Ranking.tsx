@@ -20,13 +20,13 @@ import {
 } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { dummyKishi } from '../data/kishis'
 import { RyuohsenClass } from '../enum/RyuohsenClass';
 import { JunisenClass } from '../enum/JunisenClass';
 import { PlayingStyle } from '../enum/PlayingStyle';
 import { Affiliation } from '../enum/Affiliation';
 import type { Player } from '../types/player';
 import { DateUtils } from '../utils/DateUtils';
+import { jsonPlayers } from '../data/playersJson';
 
 const sortOptions = [
   { name: "勝率"},
@@ -37,7 +37,7 @@ const sortOptions = [
 ]
 const filters = [
   {
-    id: "ryuohsen",
+    id: "ryuohsenClass",
     name: "竜王戦",
     options: [
       { value: RyuohsenClass.RYUOH, label: RyuohsenClass.RYUOH },
@@ -46,7 +46,7 @@ const filters = [
     ],
   },
   {
-    id: "junisen",
+    id: "junisenClass",
     name: "順位戦",
     options: [
       { value: JunisenClass.MEIJIN, label: JunisenClass.MEIJIN },
@@ -78,7 +78,7 @@ export default function Ranking() {
   const [open, setOpen] = useState(false)
   const [selectedFilters, setSelectedFilters] = useState<{ [key: string]: Set<string> }>({});
   const [sortKey, setSortKey] = useState<string>("勝率");
-  const filteredData = dummyKishi
+  const filteredData = jsonPlayers
   .filter((kishi) => {
     return Object.entries(selectedFilters).every(([key, set]) => {
       if (set.size === 0) return true;
@@ -392,8 +392,8 @@ export default function Ranking() {
                       </span>
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.playingStyle}</td>
-                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.junisen}</td>
-                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.ryuohsen}</td>
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.junisenClass}</td>
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.ryuohsenClass}</td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.record?.wins}</td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.record?.loses}</td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">

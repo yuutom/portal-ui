@@ -14,5 +14,6 @@ export enum GameCategory {
     SHINJINOH = "新人王戦",
     KAKOGAWA = "加古川青流戦",
     ABEMA = "ABEMAトーナメント",
-    SUNTORY = "東西対抗戦"
+    SUNTORY = "東西対抗戦",
+    OTHER = "その他"
   }

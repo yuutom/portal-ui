@@ -21,7 +21,7 @@ export default function KishiInfo({kishi}: KishiInfoProps) {
             </div>
             <img alt="" src={kishi.imageUrl} className="size-16 object-cover rounded-full bg-gray-300" />
           </div>
-          {Array.isArray(kishi.title) && (
+          {kishi.title.length > 0 && (
             <div className="text-center justify-between space-x-2 p-2">
                 {kishi.title.map((title) => (
                 <span className="inline-flex shrink-0 rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
@@ -37,7 +37,7 @@ export default function KishiInfo({kishi}: KishiInfoProps) {
                 <span className="inline-flex shrink-0 items-center rounded-full bg-blue-50 px-1.5 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
                   順
                 </span>
-                  {kishi.junisen}
+                  {kishi.junisenClass}
                 </div>
               </div>
               <div className="-ml-px flex w-0 flex-1">
@@ -45,7 +45,7 @@ export default function KishiInfo({kishi}: KishiInfoProps) {
                 <span className="inline-flex shrink-0 items-center rounded-full bg-red-50 px-1.5 py-0.5 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
                   竜
                 </span>
-                  {kishi.ryuohsen}
+                  {kishi.ryuohsenClass}
                 </div>
               </div>
             </div>
