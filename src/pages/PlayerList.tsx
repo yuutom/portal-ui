@@ -4,7 +4,7 @@ import { Danni } from '../enum/Danni'
 
 export default function PlayerList() {
   return (
-    <main>
+    <main className="max-w-screen-md mx-auto">
     {jsonPlayers.filter((kishi) => kishi.title.length > 0).length > 0 && (
       <>
         <div className="relative">

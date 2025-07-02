@@ -5,6 +5,6 @@ export enum JunisenClass {
     B2 = "B級2組",
     C1 = "C級1組",
     C2 = "C級2組",
-    FREE = "フリークラス",
+    FREE = "フリー",
     NONE = "なし"
   }

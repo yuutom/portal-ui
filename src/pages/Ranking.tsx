@@ -106,7 +106,7 @@ export default function Ranking() {
 });
 
   return (
-    <div>
+    <div className="max-w-screen-md mx-auto">
     <div className="bg-gray-50">
       {/* Mobile filter dialog */}
       <Dialog open={open} onClose={setOpen} className="relative z-40 sm:hidden">
@@ -386,11 +386,7 @@ export default function Ranking() {
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.danni}</td>
-                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                      <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        Active
-                      </span>
-                    </td>
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.affiliation}</td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.playingStyle}</td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.junisenClass}</td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{kishi.ryuohsenClass}</td>
@@ -399,7 +395,7 @@ export default function Ranking() {
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                         {kishi.record && (kishi.record.wins + kishi.record.loses > 0) ? (
                         <>
-                        {((kishi.record.wins / (kishi.record.wins + kishi.record.loses))).toFixed(4)}
+                        {((kishi.record.wins / (kishi.record.wins + kishi.record.loses))).toFixed(3)}
                         </>
                         ) : (
                         "-"
